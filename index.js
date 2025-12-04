@@ -39,6 +39,11 @@ app.use((req, res, next) => {
     res.status(404).json({ message: 'Recurso no encontrado o ruta inválida' });
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`)
-})
+// Separar app.listen() para Vercel
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`)
+    })
+}
+
+export default app; 
